@@ -18,6 +18,8 @@ import spring.demo.entity.Role;
 import spring.demo.entity.User;
 import spring.demo.repo.RoleRepo;
 import spring.demo.repo.UserRepo;
+import spring.demo.security.JWTAuthResonseDTO;
+import spring.demo.security.JwtTokenProvider;
 
 import java.util.Collections;
 
@@ -39,14 +41,22 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder; //como ya fue registrado con un bean se puede utilizar aca
 
+    @Autowired //para crear el token
+    private JwtTokenProvider jwtTokenProvider;
+
+
     //creamos un usuario autenticado con el username o email y el password que obtenemos
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<JWTAuthResonseDTO> authenticateUser(@RequestBody LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmail(), loginDTO.getPassword()));
 
         //establecemos el contexto y la autentificacion
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("Log in successful", HttpStatus.OK);
+
+        //obtenemos el token del jwtTokenProvider
+        String token = jwtTokenProvider.createToken(authentication);
+
+        return ResponseEntity.ok(new JWTAuthResonseDTO(token));
     }
 
     //REGISTRAMOS EL USUARIO

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import spring.demo.dto.MovieDTO;
 import spring.demo.dto.MovieResponse;
 import spring.demo.dto.PersonDTO;
+import spring.demo.entity.Genre;
 import spring.demo.entity.Movie;
 import spring.demo.entity.Person;
 import spring.demo.exception.ResourceNotFoundException;
+import spring.demo.repo.GenreRepo;
 import spring.demo.repo.MovieRepo;
 import spring.demo.repo.PersonRepo;
 
@@ -28,6 +30,9 @@ public class MovieService {
 
     @Autowired //injeccion de dependencias. Con esto no necesitamos instanciar el objeto
     PersonRepo personRepo;
+
+    @Autowired
+    GenreRepo genreRepo;
 
     @Autowired
     ModelMapper modelMapper;
@@ -151,5 +156,14 @@ public class MovieService {
         return mapperDTO(updatedMovie);
     }
 
-
+    public MovieDTO addGenreToMovie(long movieId, long genreId){
+        Genre genre = genreRepo.findById(genreId)
+                .orElseThrow(()-> new ResourceNotFoundException("Genre", "id", genreId));
+        Movie movie = movieRepo.findById(movieId)
+                .orElseThrow(()-> new ResourceNotFoundException("Movie", "id", movieId));
+        movie.addGenre(genre);
+        Movie updatedMovie = movieRepo.save(movie);
+        //convertimos la entidad a dto (el json) para dar la respuesta
+        return mapperDTO(updatedMovie);
+    }
 }

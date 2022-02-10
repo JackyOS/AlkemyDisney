@@ -71,5 +71,9 @@ public class MovieController {
         return ResponseEntity.ok().body(movieService.addPersonToMovie(movieId, characterId));
     }
 
+    @PutMapping("/{movieId}/genre/{genreId}") //agrego genero a la pelicula
+    public ResponseEntity<MovieDTO> addGenre(@PathVariable Long movieId, @PathVariable Long genreId){
+        return ResponseEntity.ok().body(movieService.addGenreToMovie(movieId, genreId));
+    }
 
 }

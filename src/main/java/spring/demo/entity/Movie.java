@@ -58,11 +58,14 @@ public class Movie  {
     //@JsonBackReference = me soluciona el problema de recursion infinita cuando hay relaciones bidireccionales
     //se ignora el contenido cuando se serializa. Los datos json(el response), no va a contener este atributo review y evita el problema de la recursion (eso de convertir de entidad a dto y de dto a entidad => serializacion)
 
-
-
     public void addCharacter(Person person) {
         persons.add(person);
         person.getMovies().add(this);
+    }
+
+    public void addGenre(Genre genre) {
+        genres.add(genre);
+        genre.getMovies().add(this);
     }
 
 

@@ -1,0 +1,1435 @@
+{
+	"info": {
+		"_postman_id": "6e4d6a22-7702-42ce-85fe-8b4a635f16bf",
+		"name": "Alkemy",
+		"description": "Alkemy - Disney\n\nApp para listar, crear, modificar y eliminar peliculas, personajes y comentarios.\n\nCuenta con registro y login de usuarios.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Jane\",\r\n    \"lastname\" : \"Doe\",\r\n    \"username\" : \"j\",\r\n    \"email\" : \"jdoe@gmail.com\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registrando usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usernameOrEmail\": \"fer\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Al ingresar credenciales válidas, se obtiene una respuesta con el token necesario para para las peticiones a los endpoints que requieran autenticación."
+					},
+					"response": []
+				}
+			],
+			"description": "A través de este endpoint se registran y se loguean los usuarios."
+		},
+		{
+			"name": "Character",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/characters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTY0NDUxNDEwNCwiZXhwIjoxNjQ1MTE4OTA0fQ.0R41gRZvPyfoqpL3ecKBxzxECvuG17cmUSAE-bBMMiHGVaR-5rcsfo3Yfuf3CENO8KbfPeNkMIkexeII15gvPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters"
+							]
+						},
+						"description": "Busqueda simple (trae la imagen y el nombre de los personajes)"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/characters",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/characters",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"characters"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 17:49:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"image\": \"urlVer\",\n        \"name\": \"Homero Simpson\"\n    },\n    {\n        \"id\": 2,\n        \"image\": \"urlVer\",\n        \"name\": \"Iron Man\"\n    },\n    {\n        \"id\": 3,\n        \"image\": \"urlVer\",\n        \"name\": \"Black Widow\"\n    },\n    {\n        \"id\": 4,\n        \"image\": \"urlVer\",\n        \"name\": \"Marge Simpson\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/characters?idMovie=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/characters?idMovie=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters"
+							],
+							"query": [
+								{
+									"key": "idMovie",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Buscando personaje segun el id de la pelicula"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/characters?idMovie=1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/characters?idMovie=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"characters"
+									],
+									"query": [
+										{
+											"key": "idMovie",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:08:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"image\": \"urlVer\",\n        \"name\": \"Homero Simpson\",\n        \"age\": 55,\n        \"weight\": 120,\n        \"history\": \"Hombre de familia bla bla\",\n        \"movies\": [\n            {\n                \"id\": 1,\n                \"image\": \"urlVersimpson\",\n                \"title\": \"Los Simpson\",\n                \"date\": \"1990-10-26\",\n                \"rating\": 3,\n                \"persons\": [\n                    {\n                        \"id\": 1,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Homero Simpson\",\n                        \"age\": 55,\n                        \"weight\": 120,\n                        \"history\": \"Hombre de familia bla bla\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 2,\n                        \"name\": \"Comedia\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/characters/details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTY0NDUxNDEwNCwiZXhwIjoxNjQ1MTE4OTA0fQ.0R41gRZvPyfoqpL3ecKBxzxECvuG17cmUSAE-bBMMiHGVaR-5rcsfo3Yfuf3CENO8KbfPeNkMIkexeII15gvPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/characters/details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"details"
+							]
+						},
+						"description": "Busqueda de personajes con info detallada"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/characters/details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/characters/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"characters",
+										"details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:09:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"image\": \"urlVer\",\n        \"name\": \"Homero Simpson\",\n        \"age\": 55,\n        \"weight\": 120,\n        \"history\": \"Hombre de familia bla bla\",\n        \"movies\": [\n            {\n                \"id\": 1,\n                \"image\": \"urlVersimpson\",\n                \"title\": \"Los Simpson\",\n                \"date\": \"1990-10-26\",\n                \"rating\": 3,\n                \"persons\": [\n                    {\n                        \"id\": 1,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Homero Simpson\",\n                        \"age\": 55,\n                        \"weight\": 120,\n                        \"history\": \"Hombre de familia bla bla\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 2,\n                        \"name\": \"Comedia\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"image\": \"urlVer\",\n        \"name\": \"Iron Man\",\n        \"age\": 45,\n        \"weight\": 78,\n        \"history\": \"super heroe millonario\",\n        \"movies\": [\n            {\n                \"id\": 10,\n                \"image\": \"url\",\n                \"title\": \"Avanger\",\n                \"date\": \"2012-12-12\",\n                \"rating\": 5,\n                \"persons\": [\n                    {\n                        \"id\": 3,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Black Widow\",\n                        \"age\": 36,\n                        \"weight\": 64,\n                        \"history\": \"Heroina bla bla bla\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Iron Man\",\n                        \"age\": 45,\n                        \"weight\": 78,\n                        \"history\": \"super heroe millonario\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Accion\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 3,\n        \"image\": \"urlVer\",\n        \"name\": \"Black Widow\",\n        \"age\": 36,\n        \"weight\": 64,\n        \"history\": \"Heroina bla bla bla\",\n        \"movies\": [\n            {\n                \"id\": 10,\n                \"image\": \"url\",\n                \"title\": \"Avanger\",\n                \"date\": \"2012-12-12\",\n                \"rating\": 5,\n                \"persons\": [\n                    {\n                        \"id\": 3,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Black Widow\",\n                        \"age\": 36,\n                        \"weight\": 64,\n                        \"history\": \"Heroina bla bla bla\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Iron Man\",\n                        \"age\": 45,\n                        \"weight\": 78,\n                        \"history\": \"super heroe millonario\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Accion\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 4,\n        \"image\": \"urlVer\",\n        \"name\": \"Marge Simpson\",\n        \"age\": 52,\n        \"weight\": 70,\n        \"history\": \"Mujer bla bla bla\",\n        \"movies\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/characters?age=55",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTY0NDUxNDEwNCwiZXhwIjoxNjQ1MTE4OTA0fQ.0R41gRZvPyfoqpL3ecKBxzxECvuG17cmUSAE-bBMMiHGVaR-5rcsfo3Yfuf3CENO8KbfPeNkMIkexeII15gvPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/characters?age=55",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters"
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "55"
+								}
+							]
+						},
+						"description": "Buscando por edad"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/characters?age=55",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/characters?age=55",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"characters"
+									],
+									"query": [
+										{
+											"key": "age",
+											"value": "55"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:10:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"image\": \"urlVer\",\n    \"name\": \"Homero Simpson\",\n    \"age\": 55,\n    \"weight\": 120,\n    \"history\": \"Hombre de familia bla bla\",\n    \"movies\": [\n        {\n            \"id\": 1,\n            \"image\": \"urlVersimpson\",\n            \"title\": \"Los Simpson\",\n            \"date\": \"1990-10-26\",\n            \"rating\": 3,\n            \"persons\": [\n                {\n                    \"id\": 1,\n                    \"image\": \"urlVer\",\n                    \"name\": \"Homero Simpson\",\n                    \"age\": 55,\n                    \"weight\": 120,\n                    \"history\": \"Hombre de familia bla bla\"\n                }\n            ],\n            \"genres\": [\n                {\n                    \"id\": 2,\n                    \"name\": \"Comedia\",\n                    \"image\": \"urlVer\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/characters",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pepo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"image\": \"urlVer1\",\r\n        \"name\": \"Topo\",\r\n        \"age\": 5,\r\n        \"weight\": 2,\r\n        \"history\": \"Raton bla bla bla\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters"
+							]
+						},
+						"description": "creando personaje"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/characters/5",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"image\": \"urlVer2\",\r\n        \"name\": \"Topo loco\",\r\n        \"age\": 7,\r\n        \"weight\": 3,\r\n        \"history\": \"Raton loco bla bla bla\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/characters/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"5"
+							]
+						},
+						"description": "Modificando personaje"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/characters/5",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"image\": \"urlVer2\",\r\n        \"name\": \"Topo loco\",\r\n        \"age\": 7,\r\n        \"weight\": 3,\r\n        \"history\": \"Raton loco bla bla bla\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/characters/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"characters",
+								"5"
+							]
+						},
+						"description": "Eliminando Personaje"
+					},
+					"response": []
+				}
+			],
+			"description": "A través de este endpoint se pueden crear, listar, modificar y eliminar los personajes almacenados.\nSe pueden listar con diferentes filtros."
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/genre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"name\":  \"Crimen\",\r\n        \"image\": \"urlVer\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/genre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genre"
+							]
+						},
+						"description": "Listado de los generos"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/genre",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"name\":  \"Crimen\",\r\n        \"image\": \"urlVer\",\r\n        \"movies\": []\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/genre",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"genre"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:11:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Accion\",\n        \"image\": \"urlVer\",\n        \"movies\": [\n            {\n                \"id\": 10,\n                \"image\": \"url\",\n                \"title\": \"Avanger\",\n                \"date\": \"2012-12-12\",\n                \"rating\": 5,\n                \"persons\": [\n                    {\n                        \"id\": 3,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Black Widow\",\n                        \"age\": 36,\n                        \"weight\": 64,\n                        \"history\": \"Heroina bla bla bla\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Iron Man\",\n                        \"age\": 45,\n                        \"weight\": 78,\n                        \"history\": \"super heroe millonario\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Accion\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Comedia\",\n        \"image\": \"urlVer\",\n        \"movies\": [\n            {\n                \"id\": 1,\n                \"image\": \"urlVersimpson\",\n                \"title\": \"Los Simpson\",\n                \"date\": \"1990-10-26\",\n                \"rating\": 3,\n                \"persons\": [\n                    {\n                        \"id\": 1,\n                        \"image\": \"urlVer\",\n                        \"name\": \"Homero Simpson\",\n                        \"age\": 55,\n                        \"weight\": 120,\n                        \"history\": \"Hombre de familia bla bla\"\n                    }\n                ],\n                \"genres\": [\n                    {\n                        \"id\": 2,\n                        \"name\": \"Comedia\",\n                        \"image\": \"urlVer\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Terror\",\n        \"image\": \"urlVer\",\n        \"movies\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/genre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"name\":  \"Terror\",\r\n        \"image\": \"urlVer\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/genre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genre"
+							]
+						},
+						"description": "Creando Pelicula"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/genre/8",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"name\":  \"Crimen\",\r\n        \"image\": \"urlVer\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/genre/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genre",
+								"8"
+							]
+						},
+						"description": "Modificando genero"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/genre/8",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"name\":  \"Crimen\",\r\n        \"image\": \"urlVer\",\r\n        \"movies\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/genre/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"genre",
+								"8"
+							]
+						},
+						"description": "Eliminando genero"
+					},
+					"response": []
+				}
+			],
+			"description": "A través de este endpoint se pueden crear, listar, modificar y eliminar los generos almacenados."
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/movies?pageNumber=0&pageSize=10&sortBy=rating&sortDir=asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies?pageNumber=0&pageSize=10&sortBy=rating&sortDir=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "rating"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/movies?pageNumber=0&pageSize=10&sortBy=rating&sortDir=asc",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/movies?pageNumber=0&pageSize=10&sortBy=rating&sortDir=asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"movies"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "rating"
+										},
+										{
+											"key": "sortDir",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:10:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"image\": \"urlVersimpson\",\n            \"title\": \"Los Simpson\",\n            \"date\": \"1990-10-26\",\n            \"rating\": 3,\n            \"persons\": [\n                {\n                    \"id\": 1,\n                    \"image\": \"urlVer\",\n                    \"name\": \"Homero Simpson\",\n                    \"age\": 55,\n                    \"weight\": 120,\n                    \"history\": \"Hombre de familia bla bla\"\n                }\n            ],\n            \"genres\": [\n                {\n                    \"id\": 2,\n                    \"name\": \"Comedia\",\n                    \"image\": \"urlVer\"\n                }\n            ],\n            \"reviews\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Juanita Lopez\",\n                    \"email\": \"lolo@hotmail.com\",\n                    \"content\": \"Muy buena la pelicula\",\n                    \"movie\": {\n                        \"id\": 1,\n                        \"image\": \"urlVersimpson\",\n                        \"title\": \"Los Simpson\",\n                        \"date\": \"1990-10-26\",\n                        \"rating\": 3,\n                        \"persons\": [\n                            {\n                                \"id\": 1,\n                                \"image\": \"urlVer\",\n                                \"name\": \"Homero Simpson\",\n                                \"age\": 55,\n                                \"weight\": 120,\n                                \"history\": \"Hombre de familia bla bla\"\n                            }\n                        ],\n                        \"genres\": [\n                            {\n                                \"id\": 2,\n                                \"name\": \"Comedia\",\n                                \"image\": \"urlVer\"\n                            }\n                        ]\n                    }\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Pepito Ramireza\",\n                    \"email\": \"ra@hotmail.com\",\n                    \"content\": \"La pelicula me gustó demasiado\",\n                    \"movie\": {\n                        \"id\": 1,\n                        \"image\": \"urlVersimpson\",\n                        \"title\": \"Los Simpson\",\n                        \"date\": \"1990-10-26\",\n                        \"rating\": 3,\n                        \"persons\": [\n                            {\n                                \"id\": 1,\n                                \"image\": \"urlVer\",\n                                \"name\": \"Homero Simpson\",\n                                \"age\": 55,\n                                \"weight\": 120,\n                                \"history\": \"Hombre de familia bla bla\"\n                            }\n                        ],\n                        \"genres\": [\n                            {\n                                \"id\": 2,\n                                \"name\": \"Comedia\",\n                                \"image\": \"urlVer\"\n                            }\n                        ]\n                    }\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"lola Paz\",\n                    \"email\": \"pazpaz@hotmail.com\",\n                    \"content\": \"Muy mala\",\n                    \"movie\": {\n                        \"id\": 1,\n                        \"image\": \"urlVersimpson\",\n                        \"title\": \"Los Simpson\",\n                        \"date\": \"1990-10-26\",\n                        \"rating\": 3,\n                        \"persons\": [\n                            {\n                                \"id\": 1,\n                                \"image\": \"urlVer\",\n                                \"name\": \"Homero Simpson\",\n                                \"age\": 55,\n                                \"weight\": 120,\n                                \"history\": \"Hombre de familia bla bla\"\n                            }\n                        ],\n                        \"genres\": [\n                            {\n                                \"id\": 2,\n                                \"name\": \"Comedia\",\n                                \"image\": \"urlVer\"\n                            }\n                        ]\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 10,\n            \"image\": \"url\",\n            \"title\": \"Avanger\",\n            \"date\": \"2012-12-12\",\n            \"rating\": 5,\n            \"persons\": [\n                {\n                    \"id\": 2,\n                    \"image\": \"urlVer\",\n                    \"name\": \"Iron Man\",\n                    \"age\": 45,\n                    \"weight\": 78,\n                    \"history\": \"super heroe millonario\"\n                },\n                {\n                    \"id\": 3,\n                    \"image\": \"urlVer\",\n                    \"name\": \"Black Widow\",\n                    \"age\": 36,\n                    \"weight\": 64,\n                    \"history\": \"Heroina bla bla bla\"\n                }\n            ],\n            \"genres\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Accion\",\n                    \"image\": \"urlVer\"\n                }\n            ],\n            \"reviews\": []\n        }\n    ],\n    \"pageNumber\": 0,\n    \"pageSize\": 10,\n    \"totalElements\": 2,\n    \"totalPages\": 1,\n    \"last\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/movies",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"url\",\r\n    \"title\": \"Movie\",\r\n    \"date\": \"2012-12-12\",\r\n    \"rating\": 4,\r\n    \"persons\": [],\r\n    \"genres\": [],\r\n    \"reviews\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies"
+							]
+						},
+						"description": "Creando Pelicula"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies/5/character/4",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "pepo",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies/5/character/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"5",
+								"character",
+								"4"
+							]
+						},
+						"description": "A la pelicula con id 5, le agrego personaje con id 4 "
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "pepo",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer dfasdasds",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"imagen\",\r\n    \"title\": \"Peli\",\r\n    \"date\": \"2002-02-26\",\r\n    \"rating\": 1,\r\n    \"persons\": [],\r\n    \"genres\": [],\r\n    \"reviews\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/movies/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"5"
+							]
+						},
+						"description": "Creando pelicula"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies/1/genre/2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXBlQGdtYWlsLmNvbSIsImlhdCI6MTY0NDUxNDEwNCwiZXhwIjoxNjQ1MTE4OTA0fQ.0R41gRZvPyfoqpL3ecKBxzxECvuG17cmUSAE-bBMMiHGVaR-5rcsfo3Yfuf3CENO8KbfPeNkMIkexeII15gvPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies/1/genre/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"1",
+								"genre",
+								"2"
+							]
+						},
+						"description": "Agrego un genero a una pelicula"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies/6",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"6"
+							]
+						},
+						"description": "Borrando pelicula"
+					},
+					"response": []
+				}
+			],
+			"description": "A través de este endpoint se pueden lcrear, listar, modificar y eliminar las peliculas almacenadas.\nSe pueden listar con diferentes filtros.\nSe puede asosciar los personajes con las peliculas."
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/movies/1/reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies/1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"1",
+								"reviews"
+							]
+						},
+						"description": "Me trae los comentarios de la pelicula con id 1"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/movies/1/reviews",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/movies/1/reviews",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"movies",
+										"1",
+										"reviews"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:10:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Juanita Lopez\",\n        \"email\": \"lolo@hotmail.com\",\n        \"content\": \"Muy buena la pelicula\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Pepito Ramireza\",\n        \"email\": \"ra@hotmail.com\",\n        \"content\": \"La pelicula me gustó demasiado\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"lola Paz\",\n        \"email\": \"pazpaz@hotmail.com\",\n        \"content\": \"Muy mala\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/movies/1/reviews/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/movies/1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"1",
+								"reviews",
+								"1"
+							]
+						},
+						"description": "Me trae el comentario con id 1 de la pelicula con id 1"
+					},
+					"response": [
+						{
+							"name": "http://localhost:8080/api/movies/1/reviews/1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/movies/1/reviews/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"movies",
+										"1",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Feb 2022 18:11:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Juanita Lopez\",\n    \"email\": \"lolo@hotmail.com\",\n    \"content\": \"Muy buena la pelicula\"\n}"
+						}
+					]
+				},
+				{
+					"name": "http://localhost:8080/api/movies/2/reviews/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan\",\r\n    \"email\": \"juju@hotmail.com\",\r\n    \"content\": \"Pasable. Podria ser mejor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/movies/2/reviews/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"2",
+								"reviews",
+								""
+							]
+						},
+						"description": "Creando comentario en la pelicula con id 2"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies/2/reviews/5",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juancho\",\r\n    \"email\": \"jujucho@hotmail.com\",\r\n    \"content\": \"Pasable. Podria ser mejor. Poco presupuesto.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/movies/2/reviews/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"2",
+								"reviews",
+								"5"
+							]
+						},
+						"description": "Modificando comentario con id 5 de la pelicula con id 2"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/movies/2/reviews/5",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juancho\",\r\n    \"email\": \"jujucho@hotmail.com\",\r\n    \"content\": \"Pasable. Podria ser mejor. Poco presupuesto.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/movies/2/reviews/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"movies",
+								"2",
+								"reviews",
+								"5"
+							]
+						},
+						"description": "Eliminando comentario con id 5 en la pelicula con id 2"
+					},
+					"response": []
+				}
+			],
+			"description": "A través de este endpoint se pueden crear listar, modificar y eliminar los comentarios asociados en las peliculas."
+		}
+	]
+}
