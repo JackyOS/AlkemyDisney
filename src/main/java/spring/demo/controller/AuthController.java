@@ -20,6 +20,7 @@ import spring.demo.repo.RoleRepo;
 import spring.demo.repo.UserRepo;
 import spring.demo.security.JWTAuthResonseDTO;
 import spring.demo.security.JwtTokenProvider;
+import spring.demo.service.EmailSevice;
 
 import java.util.Collections;
 
@@ -43,6 +44,9 @@ public class AuthController {
 
     @Autowired //para crear el token
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private EmailSevice emailSevice;
 
 
     //creamos un usuario autenticado con el username o email y el password que obtenemos
@@ -79,6 +83,7 @@ public class AuthController {
         user.setEmail(registerDTO.getEmail());
         user.setUsername(registerDTO.getUsername());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        emailSevice.sendWelcomeEmailTo(user.getEmail());
 
         // establecemos los roles a este usuario
         Role roles = roleRepo.findByName("ROLE_ADMIN").get();

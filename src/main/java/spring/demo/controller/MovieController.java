@@ -6,11 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.demo.dto.MovieDTO;
 import spring.demo.dto.MovieResponse;
-import spring.demo.dto.PersonDTO;
-import spring.demo.dto.ReviewDTO;
-import spring.demo.entity.Movie;
-import spring.demo.entity.Person;
-import spring.demo.exception.ResourceNotFoundException;
 import spring.demo.service.MovieService;
 import spring.demo.utils.AppConst;
 
