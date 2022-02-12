@@ -6,12 +6,3 @@ No se desarrolló el frontend.
 
 ## Documentación
 Para la documentación de los endpoints se utilizó Postman. Ver <a href="https://documenter.getpostman.com/view/19531071/UVeMGi6L">aqui</a>.
-
-## Agregados
-
-Se agregó "Comentarios" para las peliculas.
-
-## Faltantes
-
-Faltó realizar la parte del envio de mails en la parte del registro de usuarios.
-Faltó realizar tests.
